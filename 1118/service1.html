@@ -35,5 +35,89 @@
         <img src="/부자의 그릇.png" alt="부자의 그릇" width="300">
     </a>
 
+    <hr/>
+    <br/>
+
+
+    <style>
+    .wrap {
+        display: flex;         /* 가로 정렬 */
+    }
+
+    table {
+        text-align: center;
+        border-collapse: collapse;
+    }
+</style>
+
+<div class="wrap">
+    <div>
+        <h4 align="center"> 학생성적표 </h4>
+        <table border="2" width="200" height="200" align="center">
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>과목</th>
+                <th>점수</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>김민수</td>
+                <td>수학</td>
+                <td>90</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>이영희</td>
+                <td>영어</td>   
+                <td>90</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>박철수</td>
+                <td>과학</td>
+                <td>78</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h4 align="center">학생 성적표2</h4>
+        <table border="2" width="200" height="200" align="center">
+            <tr>
+                <th rowspan="2">번호</th>
+                <th rowspan="2">이름</th>
+                <th colspan="2">성적</th>
+                <th rowspan="2">비고</th>
+            </tr>
+            <tr>
+                <th>국어</th>
+                <th>영어</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>김민수</td>
+                <td>90</td>
+                <td>85</td>
+                <td>우수</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>이영희</td>
+                <td>90</td>
+                <td>85</td>
+                <td>우수</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>박철수</td>
+                <td colspan="2">결석</td>
+                <td>우수</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
 </body>
 </html>
