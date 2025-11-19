@@ -33,3 +33,68 @@ h3 {
 
 /* 형제 선택자 */
 /* 인접 형제 선택자 (Adjacent Sibling - +) */
+/* 바로 다음 형제 요소만 선택 */
+h2 + p {
+  font-style: bold;
+  color: chartreuse;
+}
+
+/* 일반 형제 선택자 (General Sibling - ~) */
+/* 이후 모든 형제 요소 선택 */
+h2 ~ p {
+  color: maroon;
+}
+
+/* 속성 선택자 */
+/* 속성 존재여부*/
+input[type="text"] {
+  border: 1px solid gray;
+}
+
+input[type="password"] {
+  border: 1px solid red;
+}
+
+a:link {
+  color: blue;
+}
+
+a:visited {
+  color: purple;
+}
+
+a:hover {
+  color: red;
+}
+
+a:active {
+  color: orange;
+}
+
+/* 순서 중요: link -> visited -> hover -> active */
+
+
+input:focus {
+  outline: 2px solid blue;
+  outline: 2px solid lightblue;
+}
+
+input:disabled {
+  background-color: blueviolet;
+}
+
+input:checked {
+  transform: scale(1.2);
+}
+
+li:first-child {
+  font-weight: bold;
+}
+
+li:last-child {
+  background-color: red;
+}
+
+li:nth-child(3) {
+  color: blue;
+}
