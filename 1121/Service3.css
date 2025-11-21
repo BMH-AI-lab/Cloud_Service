@@ -1,0 +1,43 @@
+.container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);   /* ✔ 3열 */
+    grid-template-rows: repeat(3, 150px);    /* ✔ 3행 */
+    gap: 15px;
+}
+
+.item {
+    background-size: cover;
+    background-position: center;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Image1: 2×2 */
+.item1 {
+    grid-column: 1 / span 2;   /* 1~2번 열 차지 */
+    grid-row: 1 / span 2;      /* 1~2번 행 차지 */
+    background-color: gray;
+}
+
+
+.item2 {
+
+    background-color: aqua;
+}
+
+.item3 {
+
+    background-color: yellowgreen;
+}
+.item4 {
+
+    background-color: orange;
+}
+.item5 {
+
+    background-color: burlywood
+}
