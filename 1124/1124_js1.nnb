@@ -210,9 +210,43 @@
         {
             "language": "javascript",
             "source": [
-                ""
+                "function celsiusToFahrenheit(celsius){\r\n    const fahrenheit = celsius * 9 / 5 + 32;\r\n    return fahrenheit;\r\n}\r\n\r\nconsole.log(celsiusToFahrenheit(0));    // 32\r\nconsole.log(celsiusToFahrenheit(100));  // 212"
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "32",
+                                "212",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "function average(numbers){\r\n    let sum = 0;\r\n\r\n    for (let i = 0; i < numbers.length; i++){\r\n        sum += numbers[i];\r\n    }\r\n    return sum / numbers.length;\r\n}\r\n\r\nconsole.log(average([10, 20, 30]));"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "20",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

@@ -29,4 +29,3 @@ for (let dan = 2; dan <= 9; dan++) {
     }
 }
 
-
