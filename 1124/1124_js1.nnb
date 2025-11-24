@@ -1,0 +1,218 @@
+{
+    "cells": [
+        {
+            "language": "typescript",
+            "source": [
+                "//변수 선언 \r\n//let 재할당 가능 \r\n\r\nlet name = \"홍길동\";\r\nconsole.log(name);\r\n\r\n// 재할당 \r\nname = \"김철수\";\r\nconsole.log(name);  \r\n\r\n//const 재할당 불가능\r\n//const age = 20;\r\nconsole.log(age);\r\n\r\nage = 30;\r\nconsole.log(age);\r\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "홍길동",
+                                "김철수",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "ReferenceError",
+                                "message": "age is not defined",
+                                "stack": "    at <Cell 1> [13, 0]\n    at <Cell 1> [10, 46]\n    at Script.runInContext (node:vm:149:12)\n    at Script.runInNewContext (node:vm:154:17)\n    at Object.runInNewContext (node:vm:310:38)\n    at C (c:\\Users\\배명훈\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:113345)\n    at t.execCode (c:\\Users\\배명훈\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:114312)\n    at k.<anonymous> (c:\\Users\\배명훈\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:142156)\n    at k.emit (node:events:508:28)\n    at k.emit (node:domain:489:12)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "var oldVar = \"ES5 이전\";\r\n\r\nconst userName = \"홍길동\";\r\nconst userAge = 25;\r\nconst isStudent = true;\r\n\r\n// const lname = \"홍길동\";\r\n// const user-name = \"홍길동\";\r\n// const let = \"홍길동\";\r\n\r\nlet age = 20;\r\nconsole.log(age); // 20\r\n\r\n// camelCase 권장\r\nconst age1 = 25;\r\nconst userName1 = \"김철수\";\r\nconst price = 19.99;\r\nconst negativeNumber = -10;\r\n\r\nconsole.log(typeof age1); // \"number\"\r\n\r\nconst name1 = \"홍길동\";\r\nconst name2 = '김철수';\r\nconst name3 = `이영희`;\r\n\r\nconsole.log(typeof name3); // \"string\"\r\n\r\nconst listStudents1 = true;\r\nconst isTeacher = false;\r\n\r\nconsole.log(typeof isStudent); // \"boolean\"\r\n\r\nlet empty = null;\r\nlet notDefined;\r\n\r\nconsole.log(empty);       // null\r\nconsole.log(notDefined);  // undefined\r\n\r\n\r\n// 템플릿 문자열\r\nconsole.log(\"제 이름은 \" + name1 + \"이고, 나이는 \" + age1 + \"살입니다.\");\r\nconsole.log(`제 이름은 ${userName1}이고, 나이는 ${age}살입니다.`);\r\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "20",
+                                "number",
+                                "string",
+                                "boolean",
+                                "null",
+                                "undefined",
+                                "제 이름은 홍길동이고, 나이는 25살입니다.",
+                                "제 이름은 김철수이고, 나이는 20살입니다.",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const a = 10;\r\nconst b = 3;\r\n\r\nconsole.log(a + b); // 13\r\nconsole.log(a - b); // 7\r\nconsole.log(a * b); // 30\r\nconsole.log(a / b); // 3.3333...\r\nconsole.log(a % b); // 1\r\nconsole.log(a ** b); // 1000\r\n\r\nlet count = 0;\r\ncount++;\r\nconsole.log(\"count\", count); // 1\r\ncount--;\r\nconsole.log(\"count\", count); // 0\r\n\r\nlet x = 10;\r\nx += 5;  // x = x + 5\r\nconsole.log(\"x\", x);\r\n\r\nx-= 3;  // x = x - 3\r\nconsole.log(\"x\", x);\r\nx *= 2;  // x = x * 2\r\nconsole.log(\"x\", x);\r\n\r\nlet firstName = \"홍\";\r\nlet lastName = \"길동\";\r\n\r\nlet fullName = firstName + lastName;\r\nconsole.log(\"fullName\", fullName); // \"홍길동\"\r\n\r\n\r\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "13",
+                                "7",
+                                "30",
+                                "3.3333333333333335",
+                                "1",
+                                "1000",
+                                "count 1",
+                                "count 0",
+                                "x 15",
+                                "x 12",
+                                "x 24",
+                                "fullName 홍길동",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const userName = \"홍길동\";\r\nconsole.log(\"이름: \", userName);\r\n\r\nconst userAge = 25;\r\nconsole.log(\"나이: \", userAge, \"살\");\r\n\r\nconst isStudent = true;\r\nconst isTeacher = false;    \r\nconsole.log(\"학생: \", isStudent);\r\nconsole.log(`자기 소개: 안녕하세요, 저는 ${userAge}살 ${userName} 입니다.`);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "이름:  홍길동",
+                                "나이:  25 살",
+                                "학생:  true",
+                                "자기 소개: 안녕하세요, 저는 25살 홍길동 입니다.",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "let age = 20;\r\n\r\nif (age >= 18) {\r\n    console.log(\"성인입니다.\");\r\n} \r\n\r\nage = 15;\r\n\r\nif (age >= 18) {\r\n    console.log(\"성인입니다.\");\r\n} else {\r\n    console.log(\"미성년자입니다.\");\r\n}   \r\n\r\n\r\nlet score = 85;\r\n\r\nif (score >= 90) {\r\n    console.log(\"A학점\");\r\n} else if (score >= 80) {\r\n    console.log(\"B학점\");\r\n} else if (score >= 70) {\r\n    console.log(\"C학점\");\r\n} else if (score >= 60) {\r\n    console.log(\"D학점\");\r\n}else {\r\n    console.log(\"F학점\");\r\n}\r\n\r\nconsole.log();\r\n\r\nlet a = 10;\r\nlet b = 5;\r\n\r\nconsole.log(a > b);\r\nconsole.log(a >= b);\r\nconsole.log(a < b);\r\nconsole.log(a <= b);\r\nconsole.log(a == b);\r\nconsole.log(a != b);\r\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "성인입니다.",
+                                "미성년자입니다.",
+                                "B학점",
+                                "",
+                                "true",
+                                "true",
+                                "false",
+                                "false",
+                                "false",
+                                "true",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "let num = 10;\r\nlet str = \"10\";\r\nconsole.log(\"num == str\", num == str);\r\n\r\nconsole.log(\"num != str\", num != str);\r\n\r\n\r\n\r\nconsole.log(\"num != str\", num === str);\r\nconsole.log(\"num != str\", num !== str);\r\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "num == str true",
+                                "num != str false",
+                                "num != str false",
+                                "num != str true",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let age1 = 25;\r\nlet hasLicense = true;\r\n\r\nif (age >= 18 && hasLicense) {\r\n    console.log(\"운전가능합니다.\")\r\n}\r\n\r\n\r\nlet age3 = 30;\r\nlet age3 "
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "//빈복문 \r\n\r\nconsole.log(\"안녕하세요 1\")\r\nconsole.log(\"안녕하세요 2\")\r\nconsole.log(\"안녕하세요 3\")\r\n\r\nfor (let i=l; i <= 3; i++){\r\n    console.log(`안녕하세요 ${i}`);\r\n}\r\n\r\nfor (let i = 1; i < 5; i++) {\r\n    console.log(i);\r\n}"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "안녕하세요 1",
+                                "안녕하세요 2",
+                                "안녕하세요 3",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "ReferenceError",
+                                "message": "l is not defined",
+                                "stack": "    at <Cell 8> [7, 12]\n    at <Cell 8> [12, 46]\n    at Script.runInContext (node:vm:149:12)\n    at Script.runInNewContext (node:vm:154:17)\n    at Object.runInNewContext (node:vm:310:38)\n    at C (c:\\Users\\배명훈\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:113345)\n    at t.execCode (c:\\Users\\배명훈\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:114312)\n    at k.<anonymous> (c:\\Users\\배명훈\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:142156)\n    at k.emit (node:events:508:28)\n    at k.emit (node:domain:489:12)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        }
+    ]
+}
