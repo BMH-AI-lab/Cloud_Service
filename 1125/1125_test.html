@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="main-title">환영합니다!</h1>
+    <p class="intro">첫 번째 문단</p>
+    <p class="intro">두 번째 문단</p>
+    <p class="intro">두 번째 문단</p>
+    <div class="intro">두 번째 문단</div>
+    <p class="intro">두 번째 문단</p>
+
+    <!-- 결과 출력할 장소 추가 -->
+    <p id="result"></p>
+    
+    <script>
+        // title의 내용을 반가워요!로 변경
+        document.getElementById("main-title").textContent = "반가워요!";
+        console.log(document.getElementById("main-title").textContent);
+       
+        // .intro 요소 개수 확인
+        console.log(document.querySelectorAll(".intro").length); 
+      
+    </script>
+
+</body>
+</html>

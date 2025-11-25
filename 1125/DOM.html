@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <style>
+        .title{
+            background-color: red;
+
+        }
+        .sub{
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <h1 id = "title">안녕하세요</h1>
+    <p id = "sub">DOM 배우기</p>
+    <p id = "sub">DOM 배우기2</p>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        console.log("script 입니다.");
+        console.log("안녕하세요");
+
+        console.log(document);
+        console.log(document.title);
+        console.log(document.body);
+        console.log(document.URL);
+
+        let title = document.getElementById("title");
+        console.log(title);
+
+        let notExist = document.getElementById("wrong")
+        console.log("notExist", notExist);
+
+        let sub = document.getElementsByClassName("sub");
+        console.log(sub);
+
+        let title1 = document.querySelector("#title");
+        console.log(title1);
+
+        let sub1 = document.querySelector("#sub");
+        console.log(sub1);
+
+        let sub_all = document.querySelectorAll(".sub");
+        console.log(sub_all);
+
+        let p = document.querySelectorAll("p");
+        console.log(p);
+
+        let last_li = document.querySelector("ul > li: lasty-child")
+        console.log(last_li)
+
+        let li_all = document.querySelectorAll("ul li")
+        console.log(li_all)
+
+        li_all.forEach((el, index) => {
+            console.log(el.textContent);
+        });
+
+
+        
+    </script>
+    
+</body>
+</html>

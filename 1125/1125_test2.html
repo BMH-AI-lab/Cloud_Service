@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <ul>
+            <li>항목 1</li>
+            <li>항목 2</li>
+            <li>항목 3</li>
+        </ul>
+    </div>
+
+    <script>
+        const allLi = document.querySelectorAll(".container li");
+        console.log(allLi);
+  
+        const secondLi = document.querySelector(".container li:nth-child(2)");
+        console.log(secondLi);
+
+        const lastLi = document.querySelector(".container li:last-child");
+        console.log(lastLi);
+    </script>
+    
+</body>
+</html>

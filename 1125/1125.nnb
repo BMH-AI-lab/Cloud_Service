@@ -155,7 +155,7 @@
         {
             "language": "typescript",
             "source": [
-                "fruits.sort();\r\n"
+                "fruits.sort();\r\nconsole.log(\"more\", more);"
             ],
             "outputs": [
                 {
@@ -188,6 +188,126 @@
         },
         {
             "language": "typescript",
+            "source": [
+                "let fruits = [\"복숭아\", \"수박\", \"포도\", \"딸기\", \"오렌지\"]\r\n\r\n// for문 모든 요소 출력 \r\nfor (let i = 0; i < fruits.length; i++) {\r\n  console.log(fruits[i]);\r\n};\r\n\r\nconsole.log();\r\n\r\n// for.....of 모든 요소 출력 \r\nfor (const fruit of fruits) {\r\n  console.log(fruit);\r\n}\r\n\r\nconsole.log();\r\n\r\n// forEach 모든 요소 출력 \r\nfruits.forEach(fruits=> {\r\n  console.log(fruits);\r\n});"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "복숭아",
+                                "수박",
+                                "포도",
+                                "딸기",
+                                "오렌지",
+                                "",
+                                "복숭아",
+                                "수박",
+                                "포도",
+                                "딸기",
+                                "오렌지",
+                                "",
+                                "복숭아",
+                                "수박",
+                                "포도",
+                                "딸기",
+                                "오렌지",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "let arrays = [3, 7, 2, 9, 5, 1, 8]\r\n\r\n// 1. 5보다 큰 숫자만 필터링 \r\nlet evens = arrays.filter((arrays) => arrays > 5);\r\nconsole.log(evens);\r\n\r\n// 2. 각 숫자를 제곱 \r\nlet result = arrays.map((arrays) => arrays ** 2);\r\nconsole.log(result);\r\n\r\n// 3. 오름차순 정렬\r\nlet sort1 = arrays.sort();\r\nconsole.log(sort1);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "[ 7, 9, 8 ]",
+                                "[",
+                                "   9, 49,  4, 81,",
+                                "  25,  1, 64",
+                                "]",
+                                "[",
+                                "  1, 2, 3, 5,",
+                                "  7, 8, 9",
+                                "]",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// 객체 \r\n\r\nlet personName = \"홍길;동\"\r\nlet personAge = 25;\r\nlet personCity = \"서울\";\r\n\r\nlet person = {\r\n    name: \"홍길동\", \r\n    age: 25, \r\n    city: \"서울\", \r\n}\r\n\r\nconsole.log(person.name);\r\nconsole.log(person.age);\r\nconsole.log(person.city);\r\nconsole.log();\r\n\r\nconsole.log(person[\"age\"]);\r\nconsole.log(person[\"city\"]);\r\nconsole.log();\r\n\r\nlet key = \"city\";\r\nconsole.log(person[key]);\r\n\r\nperson.job = \"개발자\"\r\nconsole.log(person);\r\nconsole.log();\r\n\r\nperson.age = 30;\r\nconsole.log(person.age);\r\nconsole.log();\r\n\r\ndelete person.city;\r\nconsole.log(person.city);\r\nconsole.log();\r\n\r\n\r\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "홍길동",
+                                "25",
+                                "서울",
+                                "",
+                                "25",
+                                "서울",
+                                "",
+                                "서울",
+                                "{ name: '홍길동', age: 25, city: '서울', job: '개발자' }",
+                                "",
+                                "30",
+                                "",
+                                "undefined",
+                                "",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "// 과제 2 학생 성적 계산 \r\n\r\nconsole.log(\"== 과제 2 학생 성적 계산 ==\");\r\nconsole.log();\r\n\r\nlet students = [\r\n    {name: \"철수\", scores: [85, 90, 78]},\r\n    {name: \"영희\", scores: [92, 88, 95]},\r\n];\r\n\r\nfor(const student of students) {\r\n    let sum = 0;\r\n\r\n    for(const score of student.scores){\r\n        sum += score;\r\n    }\r\n\r\n    const average = sum / student.scores.length;\r\n\r\n    console.log(`${student.name}의 평균 점수: ${average.toFixed(2)}`)\r\n};\r\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "== 과제 2 학생 성적 계산 ==",
+                                "",
+                                "철수의 평균 점수: 84.33",
+                                "영희의 평균 점수: 91.67",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
             "source": [
                 ""
             ],
