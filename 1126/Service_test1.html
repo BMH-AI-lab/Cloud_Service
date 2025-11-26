@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>이미지 갤러리</title>
+</head>
+<body>
+
+    <h2>이미지 갤러리</h2>
+
+    <!-- 이미지 -->
+    <img id="myImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU07uBmFtgLZwIfTNOjDjWMeSivbRNpsmrrA&s" alt="기본 이미지" width="300">
+
+    <br><br>
+
+    <!-- 버튼 -->
+    <button onclick="changeImage()">이미지 변경</button>
+
+    <script>
+        function changeImage() {
+            const img = document.getElementById("myImage");
+            img.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUuSjUyYMYWBdsCGt_dgv-IjKI7A_J8gVPBw&s";   // 힌트 그대로 사용
+            img.alt = "새 이미지";
+        }
+    </script>
+
+</body>
+</html>

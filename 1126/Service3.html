@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--<button onclick="handleClick()">클릭</button>-->
+    <button>클릭</button>
+    <script>
+        //이벤트 
+        function handleClick(){
+            alert("클릭됨!");
+        }
+
+
+        let btn = document.querySelector("button");
+        btn.onclick = function(){
+            alert("클릭됨 2!");
+        };
+
+        btn.addEventListener("click", function(){
+            alert("클릭됨 3!");
+        });
+
+        btn.addEventListener("click", () => {
+            alert("클릭됨 4!");
+        });
+
+    </script>
+    
+</body>
+</html>

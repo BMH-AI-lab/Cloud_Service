@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>과제 1: 클릭 카운터</h3>
+    <span id="countText">Click Count: 0</span>
+    <button id="btn">버튼</button>
+    <br/><br/><br/><hr>
+
+    <h3>과제 2: 키보드 이벤트</h3>
+     <input id="input" type="text" placeholder="키 입력" />
+    <p>키 이름: <span id="keyName">-</span></p>
+    <p>키 코드: <span id="keyCode">-</span></p>
+    </div>
+
+    <script>
+        // 과제 1 - 클릭 카운터
+        let cnt = 0;
+        const button = document.getElementById("btn");
+        const countText = document.getElementById("countText");
+
+        function clickCounter() {
+            cnt += 1;
+            countText.innerText = `Click Count: ${cnt}`;
+        }
+        button.addEventListener("click", clickCounter);
+
+        // 과제 2 - 키보드 이벤트
+         const input = document.getElementById("input");
+        const keyName = document.getElementById("keyName");
+        const keyCode = document.getElementById("keyCode");
+
+        input.addEventListener("keydown", (e) => {
+            console.log("Key:", e.key, "Code:", e.code);
+            keyName.innerText = e.key;
+            keyCode.innerText = e.code;
+     
+        });
+    </script>
+
+</body>
+</html>

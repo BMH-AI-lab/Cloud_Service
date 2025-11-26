@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>할 일 목록</title>
+</head>
+<body>
+
+    <h2>할 일 목록</h2>
+
+    <input type="text" id="todoInput" />
+    <button onclick="box1()">추가</button>
+
+    <ul id="todoList"></ul>
+
+    <script>
+        function box1() {
+            const input = document.getElementById("todoInput");
+            const list = document.getElementById("todoList");
+
+            if (input.value.trim() === "") return;  // 빈 값이면 종료
+
+            let li = document.createElement("li");
+            li.textContent = input.value;
+
+            list.append(li);
+            input.value = ""; // 입력 초기화
+        }
+    </script>
+
+</body>
