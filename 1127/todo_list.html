@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #222;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            min-height: 100vh;
+            padding-top: 40px;
+        }
+
+        h1 {
+            margin: 0;
+            margin-bottom: 12px;
+        }
+
+        .todo-list {
+            max-width: 400px;
+            width: 100%;
+            background-color: skyblue;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            color: #000;
+        }
+
+        #inputField {
+            margin-bottom: 10px;
+        }
+
+        /* id 이름 맞춰서 수정: #todo-input */
+        #inputField #todo-input {
+            width: calc(100% - 45px);
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        #inputField #todo-input:focus {
+            outline: none;
+        }
+
+        #inputField #addBtn {
+            position: relative;
+            width: 35px;
+            height: 35px;
+            border: none;
+            background-color: #242423;
+            border-radius: 4px;
+            cursor: pointer;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        #inputField #addBtn span {
+            display: block;
+            width: 2px;
+            height: 15px;
+            background-color: #FFE8AD;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+        }
+
+        #inputField #addBtn span:last-child {
+            transform: translate(-50%, -50%) rotate(-90deg);
+        }
+
+        #todo-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        #todo-list li {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            margin-bottom: 6px;
+            padding: 6px 8px;
+            border-radius: 4px;
+        }
+
+        .todo-text.done {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .delete-btn {
+            margin-left: auto;
+            border: none;
+            background: #ff5c5c;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 2px 8px;
+        }
+
+        .filter-btn {
+            margin: 4px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            font-weight: bold;
+            text-decoration: underline;
+            background-color: #242423;
+            color: #fff;
+        }
+
+        #clear-completed {
+            margin-left: 8px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            background: #ffb347;
+        }
+    </style>
+</head>
+<body>
+    
+    <!--Todo List-->
+    <div class="todo-list">
+        <h1>할일 목록</h1>
+
+        <div id="inputField">
+            <input id="todo-input" type="text" placeholder="할 일 추가하기">
+            <button id="addBtn" type="button">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- 남은 할일 개수 표시 -->
+        <p>남은 할 일: <span id="todo-count">0</span>개</p>
+
+        <!-- 전체/완료/미완료 필터링 -->
+        <div>
+            <button class="filter-btn active" data-filter="all">전체</button>
+            <button class="filter-btn" data-filter="active">미완료</button>
+            <button class="filter-btn" data-filter="completed">완료</button>
+            <!-- 완료된 항목 모두 삭제 -->
+            <button id="clear-completed" type="button">완료 항목 삭제</button>
+        </div>
+
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script>
+        // 전역 상태
+        let todos = [];
+        let currentFilter = "all";
+        let nextId = 1;
+
+        const input = document.getElementById("todo-input");
+        const addBtn = document.getElementById("addBtn");
+        const todoList = document.getElementById("todo-list");
+        const todoCount = document.getElementById("todo-count");
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const clearCompletedBtn = document.getElementById("clear-completed");
+
+        // 페이지 로드시 localStorage에서 데이터 불러오기
+        loadTodos();
+
+        
+        //할일 추가 addTodo()
+        function addTodo() {
+            const text = input.value.trim();
+            if (!text) return;
+
+            todos.push({
+                id: nextId++,
+                text: text,
+                completed: false
+            });
+
+            input.value = "";
+            saveTodos();
+        }
+
+        //할일 완료/미완료 토글 toggleTodo(id)
+        function toggleTodo(id) {
+            todos = todos.map(todo =>
+                todo.id === id
+                    ? { ...todo, completed: !todo.completed }
+                    : todo
+            );
+            saveTodos();
+        }
+
+        // 할일 삭제 deleteTodo(id)
+        function deleteTodo(id) {
+            todos = todos.filter(todo => todo.id !== id);
+            saveTodos();
+        }
+
+        //전체/완료/미완료 필터링 filterTodos(filter)
+        function filterTodos(filter) {
+            currentFilter = filter;
+
+            // 버튼 스타일 변경
+            filterButtons.forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.filter === filter);
+            });
+
+            renderTodos();
+        }
+
+        //완료된 항목 모두 삭제
+        function clearCompleted() {
+            todos = todos.filter(todo => !todo.completed);
+            saveTodos();
+        }
+
+        // 화면 렌더링 renderTodos()
+        function renderTodos() {
+            todoList.innerHTML = "";
+
+            let filtered = todos;
+            if (currentFilter === "active") {
+                filtered = todos.filter(t => !t.completed);
+            } else if (currentFilter === "completed") {
+                filtered = todos.filter(t => t.completed);
+            }
+
+            filtered.forEach(todo => {
+                const li = document.createElement("li");
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = todo.completed;
+                checkbox.addEventListener("change", () => toggleTodo(todo.id));
+
+                const span = document.createElement("span");
+                span.textContent = todo.text;
+                span.className = "todo-text" + (todo.completed ? " done" : "");
+
+                const delBtn = document.createElement("button");
+                delBtn.textContent = "삭제";
+                delBtn.className = "delete-btn";
+                delBtn.addEventListener("click", () => deleteTodo(todo.id));
+
+                li.appendChild(checkbox);
+                li.appendChild(span);
+                li.appendChild(delBtn);
+
+                todoList.appendChild(li);
+            });
+
+            updateCount();
+        }
+
+        // localStorage 저장 saveTodos()
+        
+        function saveTodos() {
+            localStorage.setItem("todos", JSON.stringify(todos));
+            renderTodos();
+        }
+
+        // localStorage 로드 loadTodos()
+        function loadTodos() {
+            const saved = localStorage.getItem("todos");
+            if (saved) {
+                todos = JSON.parse(saved);
+                nextId = todos.length
+                    ? Math.max(...todos.map(t => t.id)) + 1
+                    : 1;
+            }
+            renderTodos();
+        }
+
+        
+        //남은 할일 개수 표시
+        function updateCount() {
+            const remaining = todos.filter(t => !t.completed).length;
+            todoCount.textContent = remaining;
+        }
+
+        //이벤트 바인딩
+        addBtn.addEventListener("click", addTodo);
+        input.addEventListener("keydown", e => {
+            if (e.key === "Enter") addTodo();
+        });
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterTodos(btn.dataset.filter);
+            });
+        });
+
+        clearCompletedBtn.addEventListener("click", clearCompleted);
+    </script>
+</body>
+</html>

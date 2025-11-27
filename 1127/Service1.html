@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app-cintainer">
+        <div clsss="app-header">
+            <h1>Todo List</h1>
+            <p>할 일을 추가하고 관리하세요</p>
+            <div class="todo-input">
+                <input type="text" id="new-todo" placeholder="새 할 일 입력">
+                <button id="add-btn">추가</button>
+            </div>
+            <ul id="todo-list"></ul>
+
+            <style>
+                .todo-completed { text-decoration: line-through; color: #888; }
+                .todo-item { display:flex; align-items:center; gap:8px; margin:6px 0; }
+                .todo-item button { margin-left:auto; }
+            </style>
+
+            <script>
+                const input = document.getElementById('new-todo');
+                const addBtn = document.getElementById('add-btn');
+                const listEl = document.getElementById('todo-list');
+                const STORAGE_KEY = 'todos-v1';
+
+                let todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+                function save() {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+                }
+
+                function render() {
+                    listEl.innerHTML = '';
+                    todos.forEach(todo => {
+                        const li = document.createElement('li');
+                        li.className = 'todo-item';
+                        li.dataset.id = todo.id;
+
+                        const chk = document.createElement('input');
+                        chk.type = 'checkbox';
+                        chk.checked = todo.done;
+                        chk.addEventListener('change', () => {
+                            todo.done = chk.checked;
+                            save();
+                            render();
+                        });
+
+                        const span = document.createElement('span');
+                        span.textContent = todo.text;
+                        if (todo.done) span.classList.add('todo-completed');
+                        span.addEventListener('dblclick', () => {
+                            const newText = prompt('수정할 내용을 입력하세요', todo.text);
+                            if (newText !== null) {
+                                todo.text = newText.trim();
+                                save();
+                                render();
+                            }
+                        });
+
+                        const delBtn = document.createElement('button');
+                        delBtn.textContent = '삭제';
+                        delBtn.addEventListener('click', () => {
+                            todos = todos.filter(t => t.id !== todo.id);
+                            save();
+                            render();
+                        });
+
+                        li.appendChild(chk);
+                        li.appendChild(span);
+                        li.appendChild(delBtn);
+                        listEl.appendChild(li);
+                    });
+                }
+
+                function addTodo(text) {
+                    const trimmed = text.trim();
+                    if (!trimmed) return;
+                    todos.push({ id: Date.now().toString(), text: trimmed, done: false });
+                    save();
+                    render();
+                }
+
+                addBtn.addEventListener('click', () => {
+                    addTodo(input.value);
+                    input.value = '';
+                    input.focus();
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        addTodo(input.value);
+                        input.value = '';
+                    }
+                });
+
+                // 초기 렌더
+                render();
+            </script>
+        </div>
+    </div>
+    
+</body>
+</html>
