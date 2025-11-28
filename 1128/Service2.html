@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!--callback 함수-->
+    <script>
+        function doSomething(callback){
+            console.log("작업시작");
+            setTimeout(() =>{
+                console.log("작업 완료");
+                callback();
+            }, 2000);
+        }
+
+        doSomething(() => {
+            console.log("콜백 실행");
+        });
+
+    function fetchUser(userId, callback){
+        console.log("사용자 정보 요청 중....");
+
+        setTimeout(() => {
+            const user = {
+                id: UserId, 
+                name: "홍길동",
+
+            };
+        callback(user);
+    }, 1000);
+
+    fetchUser(userId, (user) =>{
+        fetchPost(user.id, (posts) => {
+            console.log("사용자:", user);
+            console.log("게시물:", posts);
+        })
+    });
+    };
+    
+
+
+    </script>
+    
+    
+</body>
+</html>

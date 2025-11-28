@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습 과제</title>
+</head>
+<body>
+    <h2>1. 디지털 시계</h2>
+    <div id="clock">Loading...</div>
+    <script>
+        function updateClock(){
+            const now = new Date();
+            let hours = now.getHours();     //시
+            let minutes = now.getMinutes();   //분
+            let seconds = now.getSeconds();   //초
+
+            hours = String(hours).padStart(2, "0");
+            minutes = String(minutes).padStart(2, "0");
+            seconds = String(seconds).padStart(2, "0");
+
+            document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds}`;
+
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+    </script>
+    <br /><hr>
+    <h2>2. 스톱워치</h2>
+    <div>
+        <button onclick="start()">Start</button>
+        <button onclick="stop()">Stop</button>
+        <button onclick="reset()">Reset</button>
+        <div id="stopwatch">00:00:00</div>
+    </div>
+    <script>
+        let stopwatchInterval;
+        let elapsed = 0;
+
+        function start() {
+            if (!stopwatchInterval) {
+                stopwatchInterval = setInterval(() => {
+                    elapsed += 10;
+                    updateStopwatch();
+                }, 10);
+            }
+        }
+
+        function stop() {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = null;
+        }
+
+        function reset() {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = null;
+            elapsed = 0;
+            document.getElementById("stopwatch").textContent = "00:00:00";
+        }
+
+        function updateStopwatch() {
+            let minutes = Math.floor(elapsed / 60000);
+            let seconds = Math.floor((elapsed % 60000) / 1000);
+            let milliseconds = Math.floor((elapsed % 1000) / 10);
+            
+            document.getElementById("stopwatch").textContent = 
+                `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}:${String(milliseconds).padStart(2, "0")}`;
+        }
+    </script>
+    <br /><hr>
+
+    <h2>3. 알림 시스템</h2>
+    <div>
+        <label for="alertTime">알림 시간(초):</label>
+        <input type="number" id="alertTime" value="3" min="1">
+        <button onclick="setAlert()">알림 설정</button>
+        <div id="alertMessage"></div>
+    </div>
+    <script>
+        function setAlert() {
+            const alertTime = document.getElementById("alertTime").value;
+            const alertMessage = document.getElementById("alertMessage");
+            
+            if (alertTime < 1) {
+                alertMessage.textContent = "1초 이상 입력하세요.";
+                return;
+            }
+            
+            alertMessage.textContent = `${alertTime}초 후에 알림이 도착합니다.`;
+            
+            setTimeout(function() {
+                alert(`${alertTime}초 후에 알림이 도착했습니다!`);
+                alertMessage.textContent = "";
+            }, alertTime * 1000);
+        }
+    </script>
+    
+</body>
+</html>

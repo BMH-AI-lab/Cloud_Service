@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>    
+
+</style>
+<body>
+    <!--비동기 프로그램-->
+    <!--여러가지 작업을 한번에 작업을 하는 기술-->
+    <h1>카운트다운 타이머</h1>
+    <div id="timer">60</div>
+    <button onclick="startTimer()">시작</button>
+    <button onclick="resetTimer()">초기화</button>
+
+
+    
+    <script>
+
+        //동기 
+        // 순서대로 코드가 실행
+        console.log("첫 번째");
+        console.log("두 번째");
+        console.log("세 번째");
+        
+        // 비동기: 브라우저가 멈추지 않음
+        // 코드가 동시에 실행
+        console.log("시작");
+
+        setTimeout(() =>{
+            console.log("2초 후 실행");
+        }, 2000);
+    
+        console.log("");
+
+    
+    // 블로킹
+    // const data = getData()
+    // console.log("완료");
+    
+    function getData(callback){
+        setTimeout(() => {
+            callback("데이터");
+        }, 5000);
+    }
+
+    getData((data) =>{
+        console.log(data);
+
+    });
+    console.log("완료"); //즉시 실행됨
+    
+
+
+    setTimeout(() =>{
+        console.log("3초 지났음");
+    }, 3000);
+
+    //매개변수 전달
+    function greet(name, age){
+        console.log(`${name}님, ${age}살이시군요`);
+
+    }
+
+    setTimeout(greet, 5000, "홍길동", 25);
+
+
+    let timerId=setTimeout(()=>{
+        console.log("timeId 실행");
+    }, 3000);
+
+    clearTimeout(timerId)
+
+    let count = 5;
+    // 실행 코드
+    let intervalId = setInterval(() =>{
+        console.log(count);
+        count--;
+
+
+        //삐져나올 조건이 필요함
+        if (count < 0){
+            clearInterval(intervalId);
+            console.log("중지")
+        }
+    }, 1000);
+
+    let timeLeft = 60;
+    let timerId1 = null;
+
+    function startTimer(){
+        if(timerId) return;
+
+        timeId = setInterval();
+                        
+        };
+    clearInterval(timerId1);
+    timeLeft = 60;
+    document.getElementById("temer").textContent = timeLeft;
+    timerId1 = null;
+
+    function resetTimer(){
+        if(timerId1) clearInterval(timerId1);
+        timeLeft = 60;
+        document.getElementById("timer").textContent = timeLeft;
+        timerId1 = null;
+    }
+
+    function startTimer(){
+        if(timerId1) return;
+        
+        timerId1 = setInterval(() => {
+            timeLeft--;
+            document.getElementById("timer").textContent = timeLeft;
+            
+            if(timeLeft <= 0){
+                clearInterval(timerId1);
+                timerId1 = null;
+            }
+        }, 1000);
+    }
+
+
+    </script>
+    
+
+    
+</body>
+</html>
