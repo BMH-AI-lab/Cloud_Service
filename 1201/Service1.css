@@ -1,0 +1,242 @@
+/* 공통 기본값 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f2f4f8;
+}
+
+/* 전체 감싸는 박스 (body 바로 아래 div) */
+body > div {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 24px 20px 28px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 제목 */
+h1 {
+  margin: 0 0 18px;
+  text-align: center;
+  font-size: 24px;
+  color: #222;
+}
+
+/* ============================= */
+/* 검색 영역: body>div 안의 첫 번째 div */
+/* ============================= */
+body > div > div:nth-of-type(1) {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d0d7de;
+  font-size: 13px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+/* 줄 간격 보정 */
+br {
+  line-height: 0;
+}
+
+/* ============================= */
+/* 로딩 표시: 두 번째 div */
+/* ============================= */
+body > div > div:nth-of-type(2) {
+  margin-top: 12px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f3f4ff;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+/* 로딩 작은 원 */
+body > div > div:nth-of-type(2) > div {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #2563eb;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+body > div > div:nth-of-type(2) > p {
+  margin: 0;
+}
+
+/* 로딩 애니메이션 */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================= */
+/* 에러 메시지: 세 번째 div */
+/* ============================= */
+body > div > div:nth-of-type(3) {
+  margin-top: 6px;
+  min-height: 16px;
+  font-size: 12px;
+  color: #dc2626;
+}
+
+/* ============================= */
+/* 날씨 정보 전체 박스: 네 번째 div */
+/* ============================= */
+body > div > div:nth-of-type(4) {
+  margin-top: 16px;
+  padding: 16px 14px 10px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+/* 도시/지역 정보: 네 번째 div 안의 첫 번째 div */
+body > div > div:nth-of-type(4) > div:nth-of-type(1) > div {
+  text-align: center;
+}
+
+body > div > div:nth-of-type(4) h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #111827;
+}
+
+body > div > div:nth-of-type(4) p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* 날씨 아이콘 + 온도: 네 번째 div 안의 두 번째 div */
+body > div > div:nth-of-type(4) > div:nth-of-type(2) {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;   /* 아이콘+온도 전체 수직 가운데 정렬 */
+  gap: 10px;
+}
+
+/* 아이콘 */
+body > div > div:nth-of-type(4) img {
+  width: 72px;
+  height: 72px;
+  display: block;        /* baseline 영향 제거 → 숫자 안 내려감 */
+}
+
+/* 온도 숫자 + 단위 정렬 */
+.temp-box {
+  display: flex;
+  align-items: center;  /* 숫자 + 단위 수직 중앙 정렬 */
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  color: #111827;
+}
+
+/* 단위 스타일 */
+.temp-box .unit {
+  margin-left: 4px;
+  font-size: 20px;
+  color: #555;
+}
+
+/* 온도 텍스트 (6 °C) */
+body > div > div:nth-of-type(4) > div:nth-of-type(2) > div {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;        /* 텍스트가 아이콘보다 아래로 안 내려가도록 */
+  display: flex;         
+  align-items: center;   /* 숫자 + 단위 포함해서 수직 정중앙 정렬 */
+}
+
+
+/* 세부 정보 박스 전체 (2×2 배치) */
+body > div > div:nth-of-type(4) > div:nth-of-type(3) {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* 각 아이템 박스 */
+body > div > div:nth-of-type(4) > div:nth-of-type(3) > div {
+  background-color: #e7eeff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 제목 */
+body > div > div:nth-of-type(4) > div:nth-of-type(3) > div > span:first-child {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+
+/* 값 + 단위 묶어 한 줄로 보여주기 */
+body > div > div:nth-of-type(4) > div:nth-of-type(3) > div > span:nth-child(2),
+body > div > div:nth-of-type(4) > div:nth-of-type(3) > div > span:nth-child(3) {
+  display: inline;
+}
+
+/* ★ 여기에 추가!! ★ */
+body > div > div:nth-of-type(4) > div:nth-of-type(3) > div {
+  white-space: nowrap;
+}
+
+/* 값 (숫자) */
+body > div > div:nth-of-type(4) > div:nth-of-type(3) > div > span:nth-child(2) {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  margin-right: 4px;
+}
+
+/* 단위 */
+body > div > div:nth-of-type(4) > div:nth-of-type(3) > div > span:nth-child(3) {
+  font-size: 14px;
+  color: #555;
+  font-weight: 500;
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>영화 사이트</title>
+
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 20px;
+        background-color: #ececec;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .search-area {
+        max-width: 400px;
+        margin: 0 auto 20px auto;
+        display: flex;
+        gap: 10px;
+      }
+
+      .search-area input {
+        flex: 1;
+        padding: 8px 10px;
+      }
+
+      .search-area button {
+        padding: 8px 14px;
+        cursor: pointer;
+      }
+
+      .card-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+        max-width: 1000px;
+        margin: 20px auto;
+      }
+
+      .card {
+        background: #fff;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+      }
+
+      .card img {
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      .card-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 8px;
+      }
+
+      .card-text {
+        font-size: 14px;
+        color: #555;
+        max-height: 70px;
+        overflow: hidden;
+      }
+
+      #popularSection {
+        display: block;
+      }
+
+      #searchSection {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>영화 검색</h1>
+
+    <!-- 검색 -->
+    <div class="search-area">
+      <input id="searchInput" type="text" placeholder="영화 제목 입력…" />
+      <button id="searchBtn">검색</button>
+    </div>
+
+    <!-- 검색 결과 -->
+    <div id="searchSection">
+      <h2 style="text-align:center;">검색 결과</h2>
+      <div id="searchResults" class="card-list"></div>
+    </div>
+
+    <!-- 인기 영화 -->
+    <div id="popularSection">
+      <h2 style="text-align:center;">인기 영화</h2>
+      <div id="popularMovies" class="card-list"></div>
+    </div>
+
+    <script>
+      const API_KEY = "d40653d9f45c0c0a68900733a9c2b6e7";
+      const BASE_URL = "https://api.themoviedb.org/3";
+      const IMG_URL = "https://image.tmdb.org/t/p/w300";
+
+      const searchInput = document.querySelector("#searchInput");
+      const searchBtn = document.querySelector("#searchBtn");
+      const searchResults = document.querySelector("#searchResults");
+      const popularMovies = document.querySelector("#popularMovies");
+
+      const searchSection = document.querySelector("#searchSection");
+      const popularSection = document.querySelector("#popularSection");
+
+      /* 카드 생성 */
+      function createMovieCard(movie, parentDiv) {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        card.innerHTML = `
+          <img src="${IMG_URL}${movie.poster_path}" alt="${movie.title}">
+          <div class="card-title">${movie.title}</div>
+          <div class="card-text">${movie.overview || "줄거리 없음"}</div>
+          <p>❤️ 평점: ${movie.vote_average.toFixed(1)}</p>
+        `;
+
+        card.addEventListener("click", () => {
+          window.location.href = `Service3.html?id=${movie.id}`;
+        });
+
+        parentDiv.appendChild(card);
+      }
+
+      /* 인기 영화 */
+      async function getPopularMovies() {
+        const res = await fetch(
+          `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=ko-KR&page=1`
+        );
+        const data = await res.json();
+        data.results.forEach((m) => createMovieCard(m, popularMovies));
+      }
+
+      /* 검색 */
+      async function searchMovie(query) {
+        const res = await fetch(
+          `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&language=ko-KR`
+        );
+        const data = await res.json();
+
+        searchResults.innerHTML = "";
+
+        if (!data.results.length) {
+          searchResults.innerHTML = "<p style='text-align:center;'>검색 결과 없음</p>";
+        } else {
+          data.results.forEach((m) => createMovieCard(m, searchResults));
+        }
+    
+        // 인기영화 숨기기, 검색결과 보이기
+        popularSection.style.display = "none";
+        searchSection.style.display = "block";
+        }       
+
+      function handleSearch() {
+        const q = searchInput.value.trim();
+        if (!q) return alert("검색어를 입력하세요");
+        searchMovie(q);
+      }
+
+      searchBtn.addEventListener("click", handleSearch);
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") handleSearch();
+      });
+
+      // 로드시 인기 영화 표시
+      getPopularMovies();
+    </script>
+  </body>
+</html>

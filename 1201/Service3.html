@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>영화 상세 정보</title>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 20px;
+      background: #f3f3f3;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .poster {
+      width: 300px;
+      border-radius: 12px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .backdrop {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 25px;
+    }
+
+    .info {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-top: 15px;
+    }
+
+    .back-btn {
+      text-decoration: none;
+      padding: 8px 14px;
+      background: #333;
+      color: white;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="Service2.html" class="back-btn">← 뒤로가기</a>
+
+  <div class="container">
+    <h1 id="title">영화 제목</h1>
+
+    <!-- 포스터 -->
+    <img id="poster" class="poster" />
+
+    <!-- 배경 이미지 -->
+    <img id="backdrop" class="backdrop" />
+
+    <p id="overview" class="info"></p>
+    <p id="genres" class="info"></p>
+    <p id="release" class="info"></p>
+    <p id="rating" class="info"></p>
+  </div>
+
+  <script>
+    const API_KEY = "d40653d9f45c0c0a68900733a9c2b6e7";
+    const BASE_URL = "https://api.themoviedb.org/3";
+    const IMG_URL = "https://image.tmdb.org/t/p";
+
+    // URL에서 영화 ID 읽기
+    const params = new URLSearchParams(window.location.search);
+    const movieId = params.get("id");
+
+    // 영화 상세 정보 불러오기
+    async function loadMovieDetail() {
+      const res = await fetch(
+        `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=ko-KR`
+      );
+      const movie = await res.json();
+
+      // 제목
+      document.getElementById("title").textContent = movie.title;
+
+      // 줄거리
+      document.getElementById("overview").textContent =
+        movie.overview || "줄거리 정보 없음";
+
+      // 개봉일
+      document.getElementById("release").textContent =
+        "📆 개봉일: " + (movie.release_date || "정보 없음");
+
+      // 평점
+      document.getElementById("rating").textContent =
+        "❤️ 평점: " + movie.vote_average.toFixed(1);
+
+      // 장르
+      document.getElementById("genres").textContent =
+        "🎬장르: " + movie.genres.map((g) => g.name).join(", ");
+
+      // 포스터
+      document.getElementById("poster").src =
+        `${IMG_URL}/w500${movie.poster_path}`;
+
+      // 배경 이미지
+      document.getElementById("backdrop").src =
+        `${IMG_URL}/original${movie.backdrop_path}`;
+    }
+
+    loadMovieDetail();
+  </script>
+</body>
+</html>
